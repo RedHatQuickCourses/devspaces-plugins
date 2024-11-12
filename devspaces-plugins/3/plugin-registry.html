@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Plugin Registry in Dev Spaces :: Configuring Plugins in Red Hat OpenShift DevSpaces</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="ide-plugins.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../..">Configuring Plugins in Red Hat OpenShift DevSpaces</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/devspaces-plugins/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="devspaces-plugins" data-version="3">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Configuring Plugins in Red Hat OpenShift DevSpaces</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Home</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="plugin-registry.html">Plugin Registry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ide-plugins.html">IDE Plugins</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="custom-plugin-registry.html">Custom Plugin Registry</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Configuring Plugins in Red Hat OpenShift DevSpaces</span>
+    <span class="version">3</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">Configuring Plugins in Red Hat OpenShift DevSpaces</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">3</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Configuring Plugins in Red Hat OpenShift DevSpaces</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plugin-registry.html">Plugin Registry</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Plugin Registry in Dev Spaces</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>IDEs like VSCode are built on a small core focusing on working with text, with most of the IDE functionality provided by <em>plugins</em>. The plugins are written in JavaScript or TypeScript and can be loaded into the IDE to provide new features and functionality.</p>
+</div>
+<div class="paragraph">
+<p>Similar to container images served from a container registry, IDE plugins are maintained in a <em>Plugin Registry</em>. The plugin registry offers a REST API for clients to search and install plugins.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Plugins are also sometimes referred to as <em>extensions</em>. They both mean the same thing - A component to extend the core IDE with new features.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As far as the VSCode IDE is concerned, there are three different plugin registries.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/plugin-registries.svg" alt="plugin registries">
+</div>
+<div class="title">Figure 1. Types of Plugin Registries</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_visual_studio_marketplace_httpsmarketplace_visualstudio_com"><a class="anchor" href="#_visual_studio_marketplace_httpsmarketplace_visualstudio_com"></a>Visual Studio Marketplace (<a href="https://marketplace.visualstudio.com" class="bare" target="_blank" rel="noopener">https://marketplace.visualstudio.com</a>)</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/vscode-marketplace.png" alt="vscode marketplace">
+</div>
+<div class="title">Figure 2. Visual Studio Marketplace</div>
+</div>
+<div class="paragraph">
+<p>It offers plugins for a wide range of open source as well as commercial, proprietary Microsoft products. Owned and operated by Microsoft. Microsoft controls the content, guidelines, and distribution. Red Hat OpenShift Dev Spaces does <strong>NOT</strong> use this registry.</p>
+</div>
+<div class="paragraph">
+<p>Although many plugins are free, the platform itself is proprietary, and Microsoft collects telemetry data from your IDE. Plugins in the Marketplace are licensed under terms dictated by each publisher, and Microsoft can place restrictions on who can access content. This registry contains the largest number of plugins/extensions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_open_vsx_registry_httpsopen_vsx_org"><a class="anchor" href="#_open_vsx_registry_httpsopen_vsx_org"></a>Open VSX Registry (<a href="https://open-vsx.org" class="bare" target="_blank" rel="noopener">https://open-vsx.org</a>)</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/openvsx.png" alt="openvsx">
+</div>
+<div class="title">Figure 3. Public Open VSX Registry</div>
+</div>
+<div class="paragraph">
+<p>An open source plugin registry hosted by the Eclipse Foundation. Specifically designed for Visual Studio Code and compatible editors, particularly those that are open-source, and not directly tied to Microsoft. It provides an open alternative to the proprietary <em>Visual Studio Marketplace</em>. It has no restrictions on accessing extensions, making it available to any editor or IDE that supports the VS Code extension model.</p>
+</div>
+<div class="paragraph">
+<p>Open VSX provides an open, community-driven alternative, especially valuable for open-source editors, and those who prefer not to rely on Microsoft license restrictions, infrastructure and telemetry. Red Hat OpenShift Dev Spaces can be configured to use this registry. It contains a lot of useful plugins, but not as many as those available in the Visual Studio Marketplace.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_embedded_open_vsx_registry"><a class="anchor" href="#_embedded_open_vsx_registry"></a>Embedded Open VSX Registry</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An embedded instance of the Open VSX registry that runs on OpenShift (installed as part of the Dev Spaces operator) to mainly support private/on-premise, air-gapped, offline, and proxy-restricted environments. The embedded Open VSX registry contains only a subset of the extensions published on the public Open VSX registry. You can build a custom embedded registry instance and add more plugins to your set up.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The embedded Open VSX registry is configured as the default option in Dev Spaces. Many of the popular plugins you use in your local Visual Studio Code instance are <strong>NOT</strong> available by default!. You need to either enable the Open VSX public registry in your Dev Spaces configuration, or create and deploy a custom instance of the embedded Open VSX registry with the plugins that you need in your Workspace.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lab_enabling_the_public_open_vsx_registry"><a class="anchor" href="#_lab_enabling_the_public_open_vsx_registry"></a>Lab: Enabling the Public Open VSX Registry</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this hands-on lab, you will enable Dev Spaces to fetch plugins/extensions from the public Open VSX registry at <a href="https://open-vsx.org" class="bare" target="_blank" rel="noopener">https://open-vsx.org</a>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to the OpenShift cluster as the <code>admin</code> user using the <code>oc</code> CLI.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc login -u admin <em>OpenShift_API_URL</em></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify that an embedded plugin registry instance is running in the cluster</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc get pods -n openshift-devspaces
+NAME                                                        READY   STATUS
+che-gateway-6757dcd74f-z6798                                4/4     Running
+devspaces-587dc9fbdd-vzr75                                  1/1     Running
+devspaces-dashboard-d78c7fbdd-t2fvf                         1/1     Running
+...
+<strong>plugin-registry-b7fc7456c-96csx                             1/1   Running</strong></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify that Dev Spaces uses the default embedded Open VSX registry. The default plugin registry is configured in the <code>devspaces</code> CheCluster CR YAML resource.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc get checluster/devspaces  \
+  -n openshift-devspaces \
+  -o jsonpath='{.spec.components.pluginRegistry.openVSXURL}'
+' '</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+An output of blank (' ') for the <code>openVSXURL</code> attribute indicates that the default embedded registry is in use. Alternatively, this field can contain the URL of the Open VSX registry from which plugins should be fetched.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Log in to the Dev Spaces dashboard as the <code>user1</code> user, and create a workspace.</p>
+</li>
+<li>
+<p>Search for an extension, for example, the <code>draw.io</code> plugin for drawing technical diagrams. This plugin does not exist in the internal plugin registry. You should see a message that says <code>No extensions found.</code></p>
+</li>
+<li>
+<p>Go to <a href="https://open-vsx.org" class="bare" target="_blank" rel="noopener">https://open-vsx.org</a>, and search for the <code>draw.io</code> plugin.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/openvsx-search.png" alt="openvsx search">
+</div>
+<div class="title">Figure 4. Search for draw.io plugin</div>
+</div>
+</li>
+<li>
+<p>The limited set of plugins available in the embedded plugin registry is configured in a JSON file at <a href="https://github.com/redhat-developer/devspaces/blob/devspaces-3.16-rhel-8/dependencies/che-plugin-registry/openvsx-sync.json" class="bare" target="_blank" rel="noopener">https://github.com/redhat-developer/devspaces/blob/devspaces-3.16-rhel-8/dependencies/che-plugin-registry/openvsx-sync.json</a>. You can also check the list of extensions from the OpenShift web console by accessing the terminal in the <code>plugin-registry</code> pod, and then viewing the JSON file in the container at the location <code>/openvsx-server/openvsx-sync.json</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Replace the <code>devspaces-3.16-rhel-8</code> string in the URL with the matching version of Dev Spaces that you are running. Check the branch names in the <a href="https://github.com/redhat-developer/devspaces" class="bare" target="_blank" rel="noopener">https://github.com/redhat-developer/devspaces</a> repository for your Dev Spaces version.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Stop the running workspace from the dashboard.</p>
+</li>
+<li>
+<p>Change the <code>.spec.components.pluginRegistry.openVSXURL</code> attribute and point it to the public Open VSX website.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc patch checluster/devspaces \
+  -n openshift-devspaces \
+  --type='merge' \
+  -p '{"spec":{"components":{"pluginRegistry": {"openVSXURL": "https://open-vsx.org"}}}}'
+<em>checluster.org.eclipse.che/devspaces patched</em></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Restart the previously stopped workspace.</p>
+</li>
+<li>
+<p>Search for the <code>draw.io</code> extension again. You should now see the plugin listed in the left panel. Click <code>Install</code> next to the plugin to install it in the Workspace.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/drawio-workspace.png" alt="drawio workspace">
+</div>
+<div class="title">Figure 5. Draw.io extension in Workspace.</div>
+</div>
+</li>
+<li>
+<p>Switch back to explorer mode and create a new file named <code>test.drawio</code> at the root of the project. The plugin&#8217;s Drawing palette opens up. You should be able to create diagrams from within the workspace.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/drawio-diagram.png" alt="drawio diagram">
+</div>
+<div class="title">Figure 6. Draw.io diagram</div>
+</div>
+</li>
+<li>
+<p>Clean up. Delete workspace.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">Home</a></span>
+  <span class="next"><a href="ide-plugins.html">IDE Plugins</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

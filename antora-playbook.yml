@@ -1,6 +1,6 @@
 site:
-  title: Placeholder Course Title
-  start_page: placeholder-course-name::index.adoc
+  title: Configuring Plugins in Red Hat OpenShift DevSpaces
+  start_page: devspaces-plugins::index.adoc
 
 content:
   sources:

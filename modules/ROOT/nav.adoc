@@ -1,1 +1,4 @@
 * xref:index.adoc[]
+** xref:plugin-registry.adoc[]
+** xref:ide-plugins.adoc[]
+** xref:custom-plugin-registry.adoc[]

@@ -1,0 +1,19 @@
+= Automatic Enablement of IDE Plugins
+:navtitle: IDE Plugins
+
+https://github.com/r5n-labs/vscode-react-javascript-snippets/blob/HEAD/docs/Snippets.md
+
+https://github.com/rsriniva/devspaces-plugins-demo
+
+. Inspect the demo repo. Inspect the devfile.
+
+. Search openvsx for React snippets and draw.io
+
+. Inspect the .vscode/extensions.json file. Add above plugins
+
+. Create a new workspace.
+
+. Switch to extensions tab in left sidebar. Notice the recommended plugins.
+
+. Show some rafce and imp snippets
+

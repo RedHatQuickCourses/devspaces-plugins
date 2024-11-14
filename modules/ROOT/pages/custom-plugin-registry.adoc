@@ -180,7 +180,7 @@ devspaces-587dc9fbdd-vzr75                1/1     Running
 *plugin-registry-69c69ff5b7-2g4lg*          1/1     Running_
 ----
 
-. Launch a new workspace using the Git repository URL https://github.com/rsriniva/devspaces-plugins-demo[window=_blank], and check the available extensions in the `Extensions` view of the workspace IDE. You should see the two new plugins you added to the custom embedded plugin registry. After the workspace is started, the two plugins should be automatically installed since the repository containers a `.vscode` folder with a recommendations JSON file with the list of plugins to install automatically.
+. Launch a new workspace using the Git repository URL https://github.com/rsriniva/devspaces-plugins-demo[window=_blank], and check the available extensions in the `Extensions` view of the workspace IDE. You should see the two new plugins you added to the custom embedded plugin registry. After the workspace is started, the two plugins should be automatically installed since the repository contains a `.vscode` folder with a recommendations JSON file with the list of plugins to install automatically.
 
 . Search the public Open VSX registry for plugins that are NOT in the `openvsx-sync.json` file, and verify that only plugins added to the JSON file before the custom build show up in the workspace.
 

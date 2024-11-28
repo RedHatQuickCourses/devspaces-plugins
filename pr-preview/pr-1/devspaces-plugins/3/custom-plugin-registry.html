@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Custom Plugin Registry :: Configuring Plugins in Red Hat OpenShift DevSpaces</title>
+    <link rel="prev" href="ide-plugins.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../..">Configuring Plugins in Red Hat OpenShift DevSpaces</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/devspaces-plugins/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="devspaces-plugins" data-version="3">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Configuring Plugins in Red Hat OpenShift DevSpaces</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Home</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="plugin-registry.html">Plugin Registry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ide-plugins.html">IDE Plugins</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="custom-plugin-registry.html">Custom Plugin Registry</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Configuring Plugins in Red Hat OpenShift DevSpaces</span>
+    <span class="version">3</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">Configuring Plugins in Red Hat OpenShift DevSpaces</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">3</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Configuring Plugins in Red Hat OpenShift DevSpaces</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="custom-plugin-registry.html">Custom Plugin Registry</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Custom Plugin Registry</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the previous section, you configured Dev Spaces to fetch VSCode plugin information from the public Open VSX registry and automatically install plugins at workspace start up.</p>
+</div>
+<div class="paragraph">
+<p>In scenarios, where you need tighter control over what plugins your developers are allowed to install, or if you have a completely offline set up, you need to run a custom version of the embedded plugin registry on your OpenShift cluster. This custom plugin registry will contain a curated list of VSCode plugins for your environment.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Building a custom plugin registry is a lengthy manual process with several moving parts. Unless you really need this feature, it is recommended to configure your Dev Spaces instance to use the public Open VSX registry as outlined in the previous sections.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references"><a class="anchor" href="#_references"></a>References</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/3.16/html-single/administration_guide/index#extensions-for-microsoft-visual-studio-code-open-source-adding-or-removing-extensions-in-the-embedded-open-vsx-registry-instance" target="_blank" rel="noopener">Adding or removing extensions in the embedded Open VSX registry instance</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lab_building_a_custom_embedded_open_vsx_plugin_registry"><a class="anchor" href="#_lab_building_a_custom_embedded_open_vsx_plugin_registry"></a>Lab: Building a Custom Embedded Open VSX Plugin Registry</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_pre_requisites"><a class="anchor" href="#_pre_requisites"></a>Pre-requisites</h3>
+<div class="paragraph">
+<p>You need the following to build a custom plugin registry container image:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A Linux x86_64 VM or machine with the following installed:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Git</p>
+</li>
+<li>
+<p>Podman</p>
+</li>
+<li>
+<p>Node.js version 18.20.3 or higher</p>
+</li>
+<li>
+<p>jq</p>
+</li>
+<li>
+<p>yq</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A Red Hat Registry Service Account at <a href="https://access.redhat.com/RegistryAuthentication" class="bare" target="_blank" rel="noopener">https://access.redhat.com/RegistryAuthentication</a> to pull the base UBI-based container images for your custom container. You can use the credentials from your Red Hat Developer Account (<a href="https://developer.redhat.com" class="bare" target="_blank" rel="noopener">https://developer.redhat.com</a>) to access the container images.</p>
+</li>
+<li>
+<p>A Quay.io account at <a href="https://quay.io" class="bare" target="_blank" rel="noopener">https://quay.io</a> to store your custom-built plugin registry container image</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The following instructions were tested on a Fedora 41 GNOME Workstation x86_64 VM. Builds on other machines (macOS, Windows) may not work and are not supported.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_steps"><a class="anchor" href="#_steps"></a>Steps</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to the OpenShift cluster as the <code>admin</code> user using the <code>oc</code> CLI.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc login -u admin <em>OpenShift_API_URL</em></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If you completed the hands-on lab in the previous sections, your Dev Spaces instance is using the public Open VSX plugin registry to fetch plugins. Reset the <code>openVSXURL</code> attribute in your CheCluster CR to point to the internal embedded plugin registry:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc patch checluster/devspaces \
+  -n openshift-devspaces \
+  --type='merge' \
+  -p '{"spec":{"components":{"pluginRegistry": {"openVSXURL": ""}}}}'</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Clone the source code in the community Open VSX registry server. There are multiple branches in this repository corresponding to the Dev Spaces product versions:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git clone https://github.com/redhat-developer/devspaces.git
+$ cd devspaces/dependencies/che-plugin-registry
+$ git checkout devspaces-3.16-rhel-8
+<em>branch 'devspaces-3.16-rhel-8' set up to track 'origin/devspaces-3.16-rhel-8'.
+Switched to a new branch 'devspaces-3.16-rhel-8'</em></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Branches are named <code>devspaces-<strong>$PRODUCT_VERSION</strong>-rhel-8</code>. Replace <code><strong>$PRODUCT_VERSION</strong></code> with your Dev Spaces version. In this case, we are building for version <strong>3.16</strong>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Edit the <code>openvsx-sync.json</code> file in the <code>che-plugin-registry</code> folder. This file contains the list of plugins from <a href="https://open-vsx.org" class="bare" target="_blank" rel="noopener">https://open-vsx.org</a> that you want to bundle into your custom plugin registry. Search for plugin in the public Open VSX registry and get their IDs and versions as outlined in the previous section. For this lab, we will add the <code>draw.io</code> and <code>ES7 React Snippets</code> plugin to the bottom of this list.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[
+  {
+    "id": "donjayamanne.githistory",
+    "version": "0.6.20"
+  },
+  ...
+  {
+    "id": "typefox.open-collaboration-tools",
+    "version": "0.1.1"
+  },
+  <strong>{
+    "id": "hediet.vscode-drawio",
+    "version": "1.6.6"
+  },
+  {
+    "id": "dsznajder.es7-react-js-snippets",
+    "version": "4.4.3"
+  }</strong>
+]</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you have a closed-source extension or an extension developed only for internal use in your organization, you can add the extension directly from a <code>.vsix</code> file by using a URL accessible to your custom plugin registry container:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "id": "&lt;publisher&gt;.&lt;name&gt;",
+  "download": "&lt;url_to_download_vsix_file&gt;",
+  "version": "&lt;extension_version&gt;"
+}</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Review and run the <code>build.sh</code> script that builds the custom registry image. You are not expected to make any changes to this script.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ <strong>./build.sh -o &lt;username&gt; -r quay.io -t custom</strong>
+<em>...
+Generate artifacts
+✔ Analyze che-editors.yaml file
+✔ Generate v3/plugins/index.json file
+✔ Generate v3/external_images.txt
+✔ Write devfile.yamls in v3/plugins folder
+...
+STEP 1/4: FROM registry.access.redhat.com/ubi8/nodejs-18:1-81 AS builder
+Trying to pull registry.access.redhat.com/ubi8/nodejs-18:1-81...
+...
+Container 'che-openvsx:latest' successfully built
+...
+🚀  Created namespace hediet
+🚀  Published hediet.vscode-drawio v1.6.6
+🚀  Created namespace dsznajder
+🚀  Published dsznajder.es7-react-js-snippets v4.4.3
+...
+COMMIT quay.io/username/pluginregistry-rhel8:custom
+...
+Successfully tagged quay.io/username/pluginregistry-rhel8:custom
+...</em></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replace <strong>username</strong> with your Quay.io username, and you can pass a tag name to the <code>-t</code> flag. Here we assign a tag named <code>custom</code>.</p>
+</div>
+</li>
+<li>
+<p>The build should take anywhere between 45 minutes to an hour depending on your internet speed and your hardware capacity. After the build finishes, you must see a large 10GB+ container image for the custom plugin registry.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ <strong>podman images</strong>
+
+<em>REPOSITORY                                 TAG             SIZE
+quay.io/username/pluginregistry-rhel8      custom           10.8 GB
+registry.redhat.io/rhel8/postgresql-15     1-50.1708914865  510 MB
+registry.access.redhat.com/ubi8/nodejs-18  1-81             614 MB
+registry.access.redhat.com/ubi8/ubi        8.9-1028         213 MB</em></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Push the locally built image to your Quay.io registry.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ podman push quay.io/&lt;username&gt;/pluginregistry-rhel8:custom</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Once the image is pushed, log in to your Quay.io account using a browser and navigate to the settings for this repository. Under the <code>Repository Visibility</code> section change the visibility to <code>public</code>. By default, container images pushed from the command line are marked <code>private</code>. If you fail to change the visibility to public, the Dev Spaces operator may fail to pull the custom image from Quay.io unless you take further steps. For simplicity, make the repository public for now.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/quay-repo-visibility.png" alt="quay repo visibility">
+</div>
+<div class="title">Figure 1. Make the repository public in Quay.io</div>
+</div>
+</li>
+<li>
+<p>Update the CheCluster CR and make Dev Spaces use the newly built custom container for the plugin registry. We override the deployment specifications for the plugin registry and point it to our new custom image in Quay.io.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc patch checluster/devspaces \
+  -n openshift-devspaces \
+  --type='merge' \
+  -p '{"spec":{"components":{"pluginRegistry":{"deployment":{"containers":[{"image":"quay.io/rsriniva/pluginregistry-rhel8:custom"}]}}}}}'</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check that the <code>plugin-registry</code> pod has restarted and is running.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ <strong>oc get pods -n openshift-devspaces</strong>
+
+<em>NAME                                      READY   STATUS
+che-gateway-6757dcd74f-z6798              4/4     Running
+devspaces-587dc9fbdd-vzr75                1/1     Running
+...
+<strong>plugin-registry-69c69ff5b7-2g4lg</strong>          1/1     Running</em></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Launch a new workspace using the Git repository URL <a href="https://github.com/rsriniva/devspaces-plugins-demo" class="bare" target="_blank" rel="noopener">https://github.com/rsriniva/devspaces-plugins-demo</a>, and check the available extensions in the <code>Extensions</code> view of the workspace IDE. You should see the two new plugins you added to the custom embedded plugin registry. After the workspace is started, the two plugins should be automatically installed since the repository contains a <code>.vscode</code> folder with a recommendations JSON file with the list of plugins to install automatically.</p>
+</li>
+<li>
+<p>Search the public Open VSX registry for plugins that are NOT in the <code>openvsx-sync.json</code> file, and verify that only plugins added to the JSON file before the custom build show up in the workspace.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="ide-plugins.html">IDE Plugins</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

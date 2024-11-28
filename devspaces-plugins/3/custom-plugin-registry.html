@@ -100,7 +100,7 @@
 <p>In the previous section, you configured Dev Spaces to fetch VSCode plugin information from the public Open VSX registry and automatically install plugins at workspace start up.</p>
 </div>
 <div class="paragraph">
-<p>In scenarios, where you need more tighter control over what plugins your developers are allowed to install, or if you have a completely offline set up, you need to run a custom version of the embedded plugin registry on your OpenShift cluster. This custom plugin registry will contain a curated list of VSCode plugins for your environment.</p>
+<p>In scenarios, where you need tighter control over what plugins your developers are allowed to install, or if you have a completely offline set up, you need to run a custom version of the embedded plugin registry on your OpenShift cluster. This custom plugin registry will contain a curated list of VSCode plugins for your environment.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -163,10 +163,10 @@
 </div>
 </li>
 <li>
-<p>A Red Hat Registry Service Account at <a href="https://access.redhat.com/RegistryAuthentication" class="bare" target="_blank" rel="noopener">https://access.redhat.com/RegistryAuthentication</a> to pull the base UBI based container images for your custom container. You can use the credentials from your Red Hat Developer Account (<a href="https://developer.redhat.com" class="bare" target="_blank" rel="noopener">https://developer.redhat.com</a>) to access the container images.</p>
+<p>A Red Hat Registry Service Account at <a href="https://access.redhat.com/RegistryAuthentication" class="bare" target="_blank" rel="noopener">https://access.redhat.com/RegistryAuthentication</a> to pull the base UBI-based container images for your custom container. You can use the credentials from your Red Hat Developer Account (<a href="https://developer.redhat.com" class="bare" target="_blank" rel="noopener">https://developer.redhat.com</a>) to access the container images.</p>
 </li>
 <li>
-<p>A Quay.io account at <a href="https://quay.io" class="bare" target="_blank" rel="noopener">https://quay.io</a> to store your custom built plugin registry container image</p>
+<p>A Quay.io account at <a href="https://quay.io" class="bare" target="_blank" rel="noopener">https://quay.io</a> to store your custom-built plugin registry container image</p>
 </li>
 </ul>
 </div>
@@ -209,7 +209,7 @@
 </div>
 </li>
 <li>
-<p>Clone the source code the community Open VSX registry server. There are multiple branches in this repository corresponding to the Dev Spaces product versions:</p>
+<p>Clone the source code in the community Open VSX registry server. There are multiple branches in this repository corresponding to the Dev Spaces product versions:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git clone https://github.com/redhat-developer/devspaces.git
@@ -341,7 +341,7 @@ registry.access.redhat.com/ubi8/ubi        8.9-1028         213 MB</em></code></
 <div class="content">
 <img src="_images/quay-repo-visibility.png" alt="quay repo visibility">
 </div>
-<div class="title">Figure 1. Make repository public in Quay.io</div>
+<div class="title">Figure 1. Make the repository public in Quay.io</div>
 </div>
 </li>
 <li>

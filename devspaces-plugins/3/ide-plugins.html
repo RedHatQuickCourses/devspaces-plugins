@@ -98,7 +98,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the previous section, you learnt how to enable the public Open VSX registry to get access to an extended set of plugins, that are not available by default in the embedded instance of the plugin registry. To avoid manually installing plugins inside workspaces, there is simple way to auto-install plugins on workspace start up by adding a JSON file inside a <code>.vscode</code> folder in the Git repository of the application source code.</p>
+<p>In the previous section, you learned how to enable the public Open VSX registry to get access to an extended set of plugins, that are not available by default in the embedded instance of the plugin registry. To avoid manually installing plugins inside workspaces, there is a simple way to auto-install plugins on workspace start up by adding a JSON file inside a <code>.vscode</code> folder in the Git repository of the application source code.</p>
 </div>
 <div class="paragraph">
 <p>Dev Spaces detects files inside the <code>.vscode</code> folder, parses the JSON file for plugins (<code>extensions.json</code>), and then automatically installs them in the workspace.</p>
@@ -129,7 +129,7 @@
 <p>Click on the <code>ES7+ React/Redux/React-Native snippets</code> option and view the details of the plugin. This plugin enables developers to auto-generate React code snippets by typing a few letters as a shortcut. You can see the shortcuts and the code the plugin generates at <a href="https://github.com/r5n-labs/vscode-react-javascript-snippets/blob/HEAD/docs/Snippets.md" class="bare" target="_blank" rel="noopener">https://github.com/r5n-labs/vscode-react-javascript-snippets/blob/HEAD/docs/Snippets.md</a>.</p>
 </li>
 <li>
-<p>To identify a plugin from the registry, VS Code uses the <em>namespace.extension-name</em> format. For example, the React snippets plugin is uniquely identified by <code>dsznajder.es7-react-js-snippets</code>, and the draw.io plugin is <code>hediet.vscode-drawio</code>. Look at the URL in the plugin details page. Copy the text after <code>extensions</code>, and replace <code>/</code> by a dot (<code>.</code>)</p>
+<p>To identify a plugin from the registry, VS Code uses the <em>namespace.extension-name</em> format. For example, the React snippets plugin is uniquely identified by <code>dsznajder.es7-react-js-snippets</code>, and the draw.io plugin is <code>hediet.vscode-drawio</code>. Look at the URL on the plugin details page. Copy the text after <code>extensions</code>, and replace <code>/</code> by a dot (<code>.</code>)</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/extension-id.png" alt="extension id">
@@ -154,7 +154,7 @@
 <p>Create a new workspace in the Dev Spaces dashboard using the Git repository URL of the React application.</p>
 </li>
 <li>
-<p>After the workspace is loaded, switch to <code>extensions</code> tab in left sidebar. Notice that the two plugins from your <code>extensions.json</code> file are automatically installed.</p>
+<p>After the workspace is loaded, switch to the <code>extensions</code> tab in the left sidebar. Notice that the two plugins from your <code>extensions.json</code> file are automatically installed.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/plugins-installing.png" alt="plugins installing">

@@ -2,7 +2,7 @@
 
 In the previous section, you configured Dev Spaces to fetch VSCode plugin information from the public Open VSX registry and automatically install plugins at workspace start up.
 
-In scenarios, where you need more tighter control over what plugins your developers are allowed to install, or if you have a completely offline set up, you need to run a custom version of the embedded plugin registry on your OpenShift cluster. This custom plugin registry will contain a curated list of VSCode plugins for your environment.
+In scenarios, where you need tighter control over what plugins your developers are allowed to install, or if you have a completely offline set up, you need to run a custom version of the embedded plugin registry on your OpenShift cluster. This custom plugin registry will contain a curated list of VSCode plugins for your environment.
 
 [WARNING]
 ====
@@ -25,8 +25,8 @@ You need the following to build a custom plugin registry container image:
 ** Node.js version 18.20.3 or higher
 ** jq
 ** yq
-* A Red Hat Registry Service Account at https://access.redhat.com/RegistryAuthentication[window=_blank] to pull the base UBI based container images for your custom container. You can use the credentials from your Red Hat Developer Account (https://developer.redhat.com[window=_blank]) to access the container images.
-* A Quay.io account at https://quay.io[window=_blank] to store your custom built plugin registry container image
+* A Red Hat Registry Service Account at https://access.redhat.com/RegistryAuthentication[window=_blank] to pull the base UBI-based container images for your custom container. You can use the credentials from your Red Hat Developer Account (https://developer.redhat.com[window=_blank]) to access the container images.
+* A Quay.io account at https://quay.io[window=_blank] to store your custom-built plugin registry container image
 
 [NOTE]
 ====
@@ -52,7 +52,7 @@ $ oc patch checluster/devspaces \
   -p '{"spec":{"components":{"pluginRegistry": {"openVSXURL": ""}}}}'
 ----
 
-. Clone the source code the community Open VSX registry server. There are multiple branches in this repository corresponding to the Dev Spaces product versions:
+. Clone the source code in the community Open VSX registry server. There are multiple branches in this repository corresponding to the Dev Spaces product versions:
 +
 [source,bash,subs=+quotes]
 ----
@@ -155,7 +155,7 @@ $ podman push quay.io/<username>/pluginregistry-rhel8:custom
 
 . Once the image is pushed, log in to your Quay.io account using a browser and navigate to the settings for this repository. Under the `Repository Visibility` section change the visibility to `public`. By default, container images pushed from the command line are marked `private`. If you fail to change the visibility to public, the Dev Spaces operator may fail to pull the custom image from Quay.io unless you take further steps. For simplicity, make the repository public for now.
 +
-image::quay-repo-visibility.png[title=Make repository public in Quay.io]
+image::quay-repo-visibility.png[title=Make the repository public in Quay.io]
 
 . Update the CheCluster CR and make Dev Spaces use the newly built custom container for the plugin registry. We override the deployment specifications for the plugin registry and point it to our new custom image in Quay.io.
 +

@@ -28,7 +28,7 @@ image::openvsx.png[title=Public Open VSX Registry]
 
 An open source plugin registry hosted by the Eclipse Foundation. Specifically designed for Visual Studio Code and compatible editors, particularly those that are open-source, and not directly tied to Microsoft. It provides an open alternative to the proprietary _Visual Studio Marketplace_. It has no restrictions on accessing extensions, making it available to any editor or IDE that supports the VS Code extension model. 
 
-Open VSX provides an open, community-driven alternative, especially valuable for open-source editors, and those who prefer not to rely on Microsoft license restrictions, infrastructure and telemetry. Red Hat OpenShift Dev Spaces can be configured to use this registry. It contains a lot of useful plugins, but not as many as those available in the Visual Studio Marketplace.
+Open VSX provides an open, community-driven alternative, especially valuable for open-source editors, and those who prefer not to rely on Microsoft license restrictions, infrastructure, and telemetry. Red Hat OpenShift Dev Spaces can be configured to use this registry. It contains a lot of useful plugins, but not as many as those available in the Visual Studio Marketplace.
 
 == Embedded Open VSX Registry
 
@@ -36,7 +36,7 @@ An embedded instance of the Open VSX registry that runs on OpenShift (installed 
 
 [IMPORTANT]
 ====
-The embedded Open VSX registry is configured as the default option in Dev Spaces. Many of the popular plugins you use in your local Visual Studio Code instance are *NOT* available by default!. You need to either enable the Open VSX public registry in your Dev Spaces configuration, or create and deploy a custom instance of the embedded Open VSX registry with the plugins that you need in your Workspace.
+The embedded Open VSX registry is configured as the default option in Dev Spaces. Many of the popular plugins you use in your local Visual Studio Code instance are *NOT* available by default! You need to either enable the Open VSX public registry in your Dev Spaces configuration or create and deploy a custom instance of the embedded Open VSX registry with the plugins that you need in your Workspace.
 ====
 
 == Lab: Enabling the Public Open VSX Registry

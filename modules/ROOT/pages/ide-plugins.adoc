@@ -1,7 +1,7 @@
 = Automatic Enablement of IDE Plugins
 :navtitle: IDE Plugins
 
-In the previous section, you learnt how to enable the public Open VSX registry to get access to an extended set of plugins, that are not available by default in the embedded instance of the plugin registry. To avoid manually installing plugins inside workspaces, there is simple way to auto-install plugins on workspace start up by adding a JSON file inside a `.vscode` folder in the Git repository of the application source code.
+In the previous section, you learned how to enable the public Open VSX registry to get access to an extended set of plugins, that are not available by default in the embedded instance of the plugin registry. To avoid manually installing plugins inside workspaces, there is a simple way to auto-install plugins on workspace start up by adding a JSON file inside a `.vscode` folder in the Git repository of the application source code.
 
 Dev Spaces detects files inside the `.vscode` folder, parses the JSON file for plugins (`extensions.json`), and then automatically installs them in the workspace.
 
@@ -17,7 +17,7 @@ image::react-snippets-plugin.png[title=React Snippets Plugin]
 
 . Click on the `ES7+ React/Redux/React-Native snippets` option and view the details of the plugin. This plugin enables developers to auto-generate React code snippets by typing a few letters as a shortcut. You can see the shortcuts and the code the plugin generates at https://github.com/r5n-labs/vscode-react-javascript-snippets/blob/HEAD/docs/Snippets.md[window=_blank].
 
-. To identify a plugin from the registry, VS Code uses the _namespace.extension-name_ format. For example, the React snippets plugin is uniquely identified by `dsznajder.es7-react-js-snippets`, and the draw.io plugin is `hediet.vscode-drawio`. Look at the URL in the plugin details page. Copy the text after `extensions`, and replace `/` by a dot (`.`)
+. To identify a plugin from the registry, VS Code uses the _namespace.extension-name_ format. For example, the React snippets plugin is uniquely identified by `dsznajder.es7-react-js-snippets`, and the draw.io plugin is `hediet.vscode-drawio`. Look at the URL on the plugin details page. Copy the text after `extensions`, and replace `/` by a dot (`.`)
 +
 image::extension-id.png[title=Get the extension ID]
 
@@ -35,7 +35,7 @@ image::extension-id.png[title=Get the extension ID]
 
 . Create a new workspace in the Dev Spaces dashboard using the Git repository URL of the React application.
 
-. After the workspace is loaded, switch to `extensions` tab in left sidebar. Notice that the two plugins from your `extensions.json` file are automatically installed.
+. After the workspace is loaded, switch to the `extensions` tab in the left sidebar. Notice that the two plugins from your `extensions.json` file are automatically installed.
 +
 image::plugins-installing.png[title=React and Draw.io plugins]
 

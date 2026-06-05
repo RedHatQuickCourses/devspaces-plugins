@@ -14,13 +14,13 @@ This course is the `fifth` in a series of `five` courses about Red Hat OpenShift
 
 This course covers how to configure plugin registries and install plugins in Dev Spaces.
 
-NOTE: The hands-on labs for this course have been tested on *Red Hat OpenShift Dev Spaces 3.16*. The labs should mostly work on minor update releases of Dev Spaces. If you encounter any issues, please open a GitHub issue in the course repository.
+NOTE: The hands-on labs for this course have been tested on *Red Hat OpenShift Dev Spaces 3.27*. The labs should mostly work on minor update releases of Dev Spaces. If you encounter any issues, please open a GitHub issue in the course repository.
 
 == Course Objectives
 
 The overall objectives of this course include:
 
-* Describe the concept of a plugin registry, and configure Dev Spaces to use different types of plugin registries
+* Describe the role of Open VSX registries in Dev Spaces and configure Dev Spaces to use custom extension registries.
 * Enable IDE plugins automatically at workspace start up
 * Configure and deploy a custom instance of the embedded Open VSX plugin registry with a set of custom plugins for the IDE
 
@@ -37,6 +37,7 @@ The overall objectives of this course include:
 The PTL team acknowledges the valuable contributions of the following Red Hat associates:
 
 * Ravi Srinivasan
+* Yogita Soni
 * Rutuja Deshmukh
 * Anna Swicegood
 * Caitlyn Rymarchyk

@@ -98,10 +98,10 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>IDEs like VSCode are built on a small core focusing on working with text, with most of the IDE functionality provided by <em>plugins</em>. The plugins are written in JavaScript or TypeScript and can be loaded into the IDE to provide new features and functionality.</p>
+<p>IDEs such as Visual Studio Code are built around a lightweight core editor, with most functionality provided through extensions. Extensions are typically written in JavaScript or TypeScript and add support for programming languages, debuggers, source control integrations, diagramming tools, and many other capabilities.</p>
 </div>
 <div class="paragraph">
-<p>Similar to container images served from a container registry, IDE plugins are maintained in a <em>Plugin Registry</em>. The plugin registry offers a REST API for clients to search and install plugins.</p>
+<p>Similar to how container images are distributed through container registries, IDE extensions are published through extension registries. These registries provide APIs that allow editors and IDEs to discover, install, and update extensions.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -111,14 +111,14 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Plugins are also sometimes referred to as <em>extensions</em>. They both mean the same thing - A component to extend the core IDE with new features.</p>
+<p>The terms plugin and <em>extension</em> are often used interchangeably. In modern Dev Spaces documentation, the term extension is preferred because it aligns with the Visual Studio Code ecosystem.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>As far as the VSCode IDE is concerned, there are three different plugin registries.</p>
+<p>For Visual Studio Code and compatible editors, extensions are commonly obtained from one of the following registries.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -138,10 +138,10 @@
 <div class="title">Figure 2. Visual Studio Marketplace</div>
 </div>
 <div class="paragraph">
-<p>It offers plugins for a wide range of open source as well as commercial, proprietary Microsoft products. Owned and operated by Microsoft. Microsoft controls the content, guidelines, and distribution. Red Hat OpenShift Dev Spaces does <strong>NOT</strong> use this registry.</p>
+<p>The Visual Studio Marketplace is operated by Microsoft and provides extensions for a wide range of open-source and commercial development tools. It contains the largest collection of Visual Studio Code extensions.</p>
 </div>
 <div class="paragraph">
-<p>Although many plugins are free, the platform itself is proprietary, and Microsoft collects telemetry data from your IDE. Plugins in the Marketplace are licensed under terms dictated by each publisher, and Microsoft can place restrictions on who can access content. This registry contains the largest number of plugins/extensions.</p>
+<p>Although many extensions are available free of charge, the marketplace is a proprietary service governed by Microsoft&#8217;s licensing and distribution policies. Because of these licensing restrictions, Red Hat OpenShift Dev Spaces does not directly use the Visual Studio Marketplace as an extension source.</p>
 </div>
 </div>
 </div>
@@ -155,10 +155,13 @@
 <div class="title">Figure 3. Public Open VSX Registry</div>
 </div>
 <div class="paragraph">
-<p>An open source plugin registry hosted by the Eclipse Foundation. Specifically designed for Visual Studio Code and compatible editors, particularly those that are open-source, and not directly tied to Microsoft. It provides an open alternative to the proprietary <em>Visual Studio Marketplace</em>. It has no restrictions on accessing extensions, making it available to any editor or IDE that supports the VS Code extension model.</p>
+<p>The Open VSX Registry is an open-source extension registry hosted by the Eclipse Foundation. It provides an open alternative to the Visual Studio Marketplace for Visual Studio Code-compatible editors and IDEs.</p>
 </div>
 <div class="paragraph">
-<p>Open VSX provides an open, community-driven alternative, especially valuable for open-source editors, and those who prefer not to rely on Microsoft license restrictions, infrastructure, and telemetry. Red Hat OpenShift Dev Spaces can be configured to use this registry. It contains a lot of useful plugins, but not as many as those available in the Visual Studio Marketplace.</p>
+<p>Open VSX is designed to be vendor-neutral and accessible to any editor that supports the Visual Studio Code extension model. It enables organizations and open-source projects to distribute and consume extensions without depending on Microsoft&#8217;s marketplace infrastructure or licensing terms.</p>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenShift Dev Spaces supports Open VSX registries as a source for IDE extensions. While the Open VSX Registry contains many popular extensions, its catalog is generally smaller than that of the Visual Studio Marketplace.</p>
 </div>
 </div>
 </div>
@@ -166,7 +169,10 @@
 <h2 id="_embedded_open_vsx_registry"><a class="anchor" href="#_embedded_open_vsx_registry"></a>Embedded Open VSX Registry</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An embedded instance of the Open VSX registry that runs on OpenShift (installed as part of the Dev Spaces operator) to mainly support private/on-premise, air-gapped, offline, and proxy-restricted environments. The embedded Open VSX registry contains only a subset of the extensions published on the public Open VSX registry. You can build a custom embedded registry instance and add more plugins to your set up.</p>
+<p>Organizations can deploy their own Open VSX registry within OpenShift to provide a curated set of extensions for Dev Spaces users. This approach is particularly useful in disconnected, air-gapped, highly regulated, or proxy-restricted environments where access to external registries may be limited or prohibited.</p>
+</div>
+<div class="paragraph">
+<p>A private Open VSX registry can contain a selected subset of extensions from the public Open VSX Registry, along with internally developed extensions that are specific to an organization.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -176,7 +182,7 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The embedded Open VSX registry is configured as the default option in Dev Spaces. Many of the popular plugins you use in your local Visual Studio Code instance are <strong>NOT</strong> available by default! You need to either enable the Open VSX public registry in your Dev Spaces configuration or create and deploy a custom instance of the embedded Open VSX registry with the plugins that you need in your Workspace.</p>
+<p>Dev Spaces can be configured to use either the public Open VSX Registry or a privately managed Open VSX registry. In restricted environments, administrators typically deploy and maintain a curated Open VSX registry containing the extensions approved for use within their organization.</p>
 </div>
 </td>
 </tr>

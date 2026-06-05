@@ -1,5 +1,5 @@
-= Plugin Registry in Dev Spaces
-:navtitle: Plugin Registry
+= Open VSX Registries and IDE Extensions in Dev Spaces
+:navtitle: Open VSX Registries
 
 IDEs such as Visual Studio Code are built around a lightweight core editor, with most functionality provided through extensions. Extensions are typically written in JavaScript or TypeScript and add support for programming languages, debuggers, source control integrations, diagramming tools, and many other capabilities.
 

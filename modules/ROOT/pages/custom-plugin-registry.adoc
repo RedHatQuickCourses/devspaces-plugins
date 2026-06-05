@@ -1,4 +1,4 @@
-= Custom Plugin Registry
+= Custom Open VSX Registry
 
 In the previous section, you configured Dev Spaces to fetch VSCode plugin information from the public Open VSX registry and automatically install plugins at workspace start up.
 
@@ -13,7 +13,7 @@ Building a custom plugin registry is a lengthy manual process with several movin
 
 * https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/3.16/html-single/administration_guide/index#extensions-for-microsoft-visual-studio-code-open-source-adding-or-removing-extensions-in-the-embedded-open-vsx-registry-instance[Adding or removing extensions in the embedded Open VSX registry instance^]
 
-== Lab: Building a Custom Embedded Open VSX Plugin Registry
+== Lab: Building a Custom Embedded Open VSX Registry
 
 === Pre-requisites
 

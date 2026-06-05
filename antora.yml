@@ -1,5 +1,5 @@
 name: devspaces-plugins
-title: Configuring Plugins in Red Hat OpenShift DevSpaces
+title: Configuring IDE Extensions in Red Hat OpenShift Dev Spaces
 version: 3
 nav:
 - modules/ROOT/nav.adoc

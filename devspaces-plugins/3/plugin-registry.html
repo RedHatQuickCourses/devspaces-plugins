@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Open VSX Registries and IDE Extensions in Dev Spaces :: Configuring Plugins in Red Hat OpenShift DevSpaces</title>
+    <title>Open VSX Registries and IDE Extensions in Red Hat OpenShift Dev Spaces :: Configuring Plugins in Red Hat OpenShift DevSpaces</title>
     <link rel="prev" href="index.html">
     <link rel="next" href="ide-plugins.html">
     <meta name="generator" content="Antora 3.1.3">
@@ -46,7 +46,7 @@
     <a class="nav-link" href="plugin-registry.html">Open VSX Registries</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ide-plugins.html">IDE Plugins</a>
+    <a class="nav-link" href="ide-plugins.html">IDE Extensions</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="custom-plugin-registry.html">Custom Open VSX Registry</a>
@@ -94,7 +94,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Open VSX Registries and IDE Extensions in Dev Spaces</h1>
+<h1 class="page">Open VSX Registries and IDE Extensions in Red Hat OpenShift Dev Spaces</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -141,7 +141,7 @@
 <p>The Visual Studio Marketplace is operated by Microsoft and provides extensions for a wide range of open-source and commercial development tools. It contains the largest collection of Visual Studio Code extensions.</p>
 </div>
 <div class="paragraph">
-<p>Although many extensions are available free of charge, the marketplace is a proprietary service governed by Microsoft&#8217;s licensing and distribution policies. Because of these licensing restrictions, Red Hat OpenShift Dev Spaces does not directly use the Visual Studio Marketplace as an extension source.</p>
+<p>Although many extensions are available free of charge, the marketplace is a proprietary service governed by Microsoft&#8217;s licensing and distribution policies. Because of Microsoft&#8217;s licensing restrictions on the Visual Studio Marketplace service, Red Hat OpenShift Dev Spaces does not directly integrate with it as an extension source. Instead, Dev Spaces uses Open VSX registries for extension discovery and installation.</p>
 </div>
 </div>
 </div>
@@ -169,7 +169,10 @@
 <h2 id="_embedded_open_vsx_registry"><a class="anchor" href="#_embedded_open_vsx_registry"></a>Embedded Open VSX Registry</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Organizations can deploy their own Open VSX registry within OpenShift to provide a curated set of extensions for Dev Spaces users. This approach is particularly useful in disconnected, air-gapped, highly regulated, or proxy-restricted environments where access to external registries may be limited or prohibited.</p>
+<p>By default, Red Hat OpenShift Dev Spaces deploys an embedded Open VSX registry that provides a curated subset of extensions synchronized from the public Open VSX Registry.</p>
+</div>
+<div class="paragraph">
+<p>Organizations can also deploy and manage their own Open VSX registry within OpenShift to provide organization-approved extensions. This approach is particularly useful in disconnected, air-gapped, highly regulated, or proxy-restricted environments where access to external registries may be limited or prohibited.</p>
 </div>
 <div class="paragraph">
 <p>A private Open VSX registry can contain a selected subset of extensions from the public Open VSX Registry, along with internally developed extensions that are specific to an organization.</p>
@@ -191,7 +194,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lab_enabling_the_public_open_vsx_registry"><a class="anchor" href="#_lab_enabling_the_public_open_vsx_registry"></a>Lab: Enabling the Public Open VSX Registry</h2>
+<h2 id="_lab_configuring_dev_spaces_to_use_the_public_open_vsx_registry"><a class="anchor" href="#_lab_configuring_dev_spaces_to_use_the_public_open_vsx_registry"></a>Lab: Configuring Dev Spaces to Use the Public Open VSX Registry</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In this hands-on lab, you will enable Dev Spaces to fetch plugins/extensions from the public Open VSX registry at <a href="https://open-vsx.org" class="bare" target="_blank" rel="noopener">https://open-vsx.org</a>.</p>
@@ -207,7 +210,7 @@
 </div>
 </li>
 <li>
-<p>Verify that an embedded plugin registry instance is running in the cluster</p>
+<p>Verify that an embedded extension registry instance is running in the cluster</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc get pods -n openshift-devspaces
@@ -221,7 +224,7 @@ devspaces-dashboard-d78c7fbdd-t2fvf                         1/1     Running
 </div>
 </li>
 <li>
-<p>Verify that Dev Spaces uses the default embedded Open VSX registry. The default plugin registry is configured in the <code>devspaces</code> CheCluster CR YAML resource.</p>
+<p>Verify that Dev Spaces uses the default embedded Open VSX registry. The default extension registry is configured in the <code>devspaces</code> CheCluster CR YAML resource.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc get checluster/devspaces  \
@@ -237,7 +240,7 @@ devspaces-dashboard-d78c7fbdd-t2fvf                         1/1     Running
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-An output of blank (' ') for the <code>openVSXURL</code> attribute indicates that the default embedded registry is in use. Alternatively, this field can contain the URL of the Open VSX registry from which plugins should be fetched.
+If the <code>openVSXURL</code> attribute is empty, Dev Spaces uses the default embedded Open VSX registry deployed within the cluster. If this field contains a URL, Dev Spaces retrieves extensions from the specified Open VSX registry.
 </td>
 </tr>
 </table>
@@ -247,10 +250,10 @@ An output of blank (' ') for the <code>openVSXURL</code> attribute indicates tha
 <p>Log in to the Dev Spaces dashboard as the <code>user1</code> user, and create a workspace.</p>
 </li>
 <li>
-<p>Search for an extension, for example, the <code>draw.io</code> plugin for drawing technical diagrams. This plugin does not exist in the internal plugin registry. You should see a message that says <code>No extensions found.</code></p>
+<p>Search for an extension, for example, the <code>draw.io Integration</code> extension. This extension does not exist in the internal extension registry. You should see a message that says <code>No extensions found.</code></p>
 </li>
 <li>
-<p>Go to <a href="https://open-vsx.org" class="bare" target="_blank" rel="noopener">https://open-vsx.org</a>, and search for the <code>draw.io</code> plugin.</p>
+<p>Go to <a href="https://open-vsx.org" class="bare" target="_blank" rel="noopener">https://open-vsx.org</a>, and search for the <code>draw.io</code> extension.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/openvsx-search.png" alt="openvsx search">
@@ -259,7 +262,7 @@ An output of blank (' ') for the <code>openVSXURL</code> attribute indicates tha
 </div>
 </li>
 <li>
-<p>The limited set of plugins available in the embedded plugin registry is configured in a JSON file at <a href="https://github.com/redhat-developer/devspaces/blob/devspaces-3.16-rhel-8/dependencies/che-plugin-registry/openvsx-sync.json" class="bare" target="_blank" rel="noopener">https://github.com/redhat-developer/devspaces/blob/devspaces-3.16-rhel-8/dependencies/che-plugin-registry/openvsx-sync.json</a>. You can also check the list of extensions from the OpenShift web console by accessing the terminal in the <code>plugin-registry</code> pod, and then viewing the JSON file in the container at the location <code>/openvsx-server/openvsx-sync.json</code>.</p>
+<p>The limited set of extensions available in the embedded extension registry is configured in a JSON file at <a href="https://github.com/redhat-developer/devspaces/blob/devspaces-3.27-rhel-9/dependencies/che-plugin-registry/openvsx-sync.json" class="bare" target="_blank" rel="noopener">https://github.com/redhat-developer/devspaces/blob/devspaces-3.27-rhel-9/dependencies/che-plugin-registry/openvsx-sync.json</a>. You can also check the list of extensions from the OpenShift web console by accessing the terminal in the <code>plugin-registry</code> pod, and then viewing the JSON file in the container at the location <code>/openvsx-server/openvsx-sync.json</code>.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -267,7 +270,7 @@ An output of blank (' ') for the <code>openVSXURL</code> attribute indicates tha
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Replace the <code>devspaces-3.16-rhel-8</code> string in the URL with the matching version of Dev Spaces that you are running. Check the branch names in the <a href="https://github.com/redhat-developer/devspaces" class="bare" target="_blank" rel="noopener">https://github.com/redhat-developer/devspaces</a> repository for your Dev Spaces version.
+Replace the <code>devspaces-3.27-rhel-9</code> branch name with the branch corresponding to the version of Dev Spaces deployed in your environment. You can identify available branches in the Red Hat Dev Spaces GitHub repository.
 </td>
 </tr>
 </table>
@@ -292,7 +295,7 @@ Replace the <code>devspaces-3.16-rhel-8</code> string in the URL with the matchi
 <p>Restart the previously stopped workspace.</p>
 </li>
 <li>
-<p>Search for the <code>draw.io</code> extension again. You should now see the plugin listed in the left panel. Click <code>Install</code> next to the plugin to install it in the Workspace.</p>
+<p>Search for the <code>draw.io Integration</code> extension again. You should now see the extension listed in the Extensions view. Click <code>Install</code> to install it in the running workspace.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/drawio-workspace.png" alt="drawio workspace">
@@ -301,7 +304,7 @@ Replace the <code>devspaces-3.16-rhel-8</code> string in the URL with the matchi
 </div>
 </li>
 <li>
-<p>Switch back to explorer mode and create a new file named <code>test.drawio</code> at the root of the project. The plugin&#8217;s Drawing palette opens up. You should be able to create diagrams from within the workspace.</p>
+<p>Switch back to explorer mode and create a new file named <code>test.drawio</code> at the root of the project. The extension&#8217;s Drawing palette opens up. You should be able to create diagrams from within the workspace.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/drawio-diagram.png" alt="drawio diagram">
@@ -310,7 +313,19 @@ Replace the <code>devspaces-3.16-rhel-8</code> string in the URL with the matchi
 </div>
 </li>
 <li>
-<p>Clean up. Delete workspace.</p>
+<p>(Optional) Restore the original configuration to use the embedded Open VSX registry.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc patch checluster/devspaces \
+  -n openshift-devspaces \
+  --type='merge' \
+  -p '{"spec":{"components":{"pluginRegistry": {"openVSXURL": "https://open-vsx.org"}}}}'
+<em>checluster.org.eclipse.che/devspaces patched</em></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Delete the workspace from the Dev Spaces dashboard.</p>
+</div>
 </li>
 </ol>
 </div>
@@ -318,7 +333,7 @@ Replace the <code>devspaces-3.16-rhel-8</code> string in the URL with the matchi
 </div>
 <nav class="pagination">
   <span class="prev"><a href="index.html">Home</a></span>
-  <span class="next"><a href="ide-plugins.html">IDE Plugins</a></span>
+  <span class="next"><a href="ide-plugins.html">IDE Extensions</a></span>
 </nav>
 </article>
   </div>

@@ -45,7 +45,7 @@
     <a class="nav-link" href="plugin-registry.html">Open VSX Registries</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ide-plugins.html">IDE Plugins</a>
+    <a class="nav-link" href="ide-plugins.html">IDE Extensions</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="custom-plugin-registry.html">Custom Open VSX Registry</a>
@@ -116,17 +116,19 @@
 </tr>
 </table>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Although customizing the embedded Open VSX registry is supported in Dev Spaces 3.27, Red Hat recommends deploying a standalone Open VSX registry for production environments requiring strict control over extensions, disconnected operation, or organizational governance. The procedure described in this chapter is intended primarily for learning purposes and small-scale environments.</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_references"><a class="anchor" href="#_references"></a>References</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/3.16/html-single/administration_guide/index#extensions-for-microsoft-visual-studio-code-open-source-adding-or-removing-extensions-in-the-embedded-open-vsx-registry-instance" target="_blank" rel="noopener">Adding or removing extensions in the embedded Open VSX registry instance</a></p>
-</li>
-</ul>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -381,7 +383,7 @@ devspaces-587dc9fbdd-vzr75                1/1     Running
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="ide-plugins.html">IDE Plugins</a></span>
+  <span class="prev"><a href="ide-plugins.html">IDE Extensions</a></span>
 </nav>
 </article>
   </div>

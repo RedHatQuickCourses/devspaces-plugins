@@ -1,27 +1,29 @@
-= Automatic Enablement of IDE Plugins
-:navtitle: IDE Plugins
+= Automatic Installation of IDE Extensions
+:navtitle: IDE Extensions
 
-In the previous section, you learned how to enable the public Open VSX registry to get access to an extended set of plugins, that are not available by default in the embedded instance of the plugin registry. To avoid manually installing plugins inside workspaces, there is a simple way to auto-install plugins on workspace start up by adding a JSON file inside a `.vscode` folder in the Git repository of the application source code.
+In the previous section, you learned how to configure Dev Spaces to use the public Open VSX registry to access extensions that are not available in the embedded Open VSX registry. To avoid manually installing extensions in every workspace, you can configure automatic extension installation by adding an `extensions.json` file inside the `.vscode` directory of your project's Git repository.
+
+When a workspace starts, Dev Spaces detects the `.vscode/extensions.json` file and automatically installs the recommended extensions listed in the file.
 
 Dev Spaces detects files inside the `.vscode` folder, parses the JSON file for plugins (`extensions.json`), and then automatically installs them in the workspace.
 
-== Lab: Enable Automatic Installation of IDE Plugins 
+== Lab: Enable Automatic Installation of IDE Extensions
 
-. Ensure that you have configured Dev Spaces to fetch plugins from the public Open VSX plugin registry (https://open-vsx.org[window=_blank]). Complete the hands-on lab in the previous section.
+. Ensure that you have configured Dev Spaces to retrieve extensions from the public Open VSX registry (`https://open-vsx.org`)[window=_blank]). Complete the hands-on lab in the previous section.
 
-. Inspect the Git repository for a sample React front-end web application at https://github.com/rsriniva/devspaces-plugins-demo[window=_blank]. Briefly review the devfile in the repository.
+. Inspect the Git repository for a sample React front-end application at https://github.com/rsriniva/devspaces-plugins-demo[window=_blank]. Review the `devfile.yaml` file to understand how the workspace environment is configured.
 
-. Let's assume you want to automatically install the `draw.io` and `ES7 React/Redux Snippets` plugins for your project. Search the Open VSX website for the React snippets and draw.io plugins.
+. Assume that you want Dev Spaces to automatically install the `draw.io Integration` and `ES7+ React/Redux/React-Native snippets` extensions for your project. Search the Open VSX Registry for the React snippets and draw.io extensions.
 +
 image::react-snippets-plugin.png[title=React Snippets Plugin]
 
 . Click on the `ES7+ React/Redux/React-Native snippets` option and view the details of the plugin. This plugin enables developers to auto-generate React code snippets by typing a few letters as a shortcut. You can see the shortcuts and the code the plugin generates at https://github.com/r5n-labs/vscode-react-javascript-snippets/blob/HEAD/docs/Snippets.md[window=_blank].
 
-. To identify a plugin from the registry, VS Code uses the _namespace.extension-name_ format. For example, the React snippets plugin is uniquely identified by `dsznajder.es7-react-js-snippets`, and the draw.io plugin is `hediet.vscode-drawio`. Look at the URL on the plugin details page. Copy the text after `extensions`, and replace `/` by a dot (`.`)
+. Each extension in Open VSX is uniquely identified using the `publisher.extension-name` format. Visual Studio Code-compatible editors use this identifier when installing recommended extensions automatically. For example, the React snippets extension is identified by `dsznajder.es7-react-js-snippets`, and the draw.io extension is identified by `hediet.vscode-drawio`. You can determine the extension identifier from the extension details page URL in Open VSX. Copy the path after `/extension/` and replace the `/` separator with a dot (`.`).
 +
 image::extension-id.png[title=Get the extension ID]
 
-. Inspect the `.vscode/extensions.json` file in the Git repository. Add the IDs of the plugins you want to enable in your workspace to the `recommendations` list.
+. Inspect the `.vscode/extensions.json` file in the Git repository. Add the identifiers of the extensions that should be automatically installed to the `recommendations` array in `.vscode/extensions.json`.
 +
 [source,json,subs=+quotes]
 ----
@@ -35,9 +37,9 @@ image::extension-id.png[title=Get the extension ID]
 
 . Create a new workspace in the Dev Spaces dashboard using the Git repository URL of the React application.
 
-. After the workspace is loaded, switch to the `extensions` tab in the left sidebar. Notice that the two plugins from your `extensions.json` file are automatically installed.
+. After the workspace is loaded, switch to the `extensions` tab in the left sidebar. Notice that the extensions listed in `extensions.json` are automatically installed shortly after the workspace starts.
 +
-image::plugins-installing.png[title=React and Draw.io plugins]
+image::plugins-installing.png[title=Automatically Installed Extensions]
 
-. In the IDE, open a Javascript, JSX, or TSX file and type `rafce`. The plugin expands the snippet abbreviation to the code for a functional React component in the editor.
+. In the IDE, open a JavaScript, JSX, TypeScript, or TSX file and type `rafce`. The React snippets extension expands the abbreviation into boilerplate code for a React functional component. This demonstrates how teams can standardize development environments by automatically provisioning commonly used extensions through source control.
 

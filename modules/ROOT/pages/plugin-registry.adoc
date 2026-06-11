@@ -1,4 +1,4 @@
-= Open VSX Registries and IDE Extensions in Dev Spaces
+= Open VSX Registries and IDE Extensions in Red Hat OpenShift Dev Spaces
 :navtitle: Open VSX Registries
 
 IDEs such as Visual Studio Code are built around a lightweight core editor, with most functionality provided through extensions. Extensions are typically written in JavaScript or TypeScript and add support for programming languages, debuggers, source control integrations, diagramming tools, and many other capabilities.
@@ -20,7 +20,7 @@ image::vscode-marketplace.png[title=Visual Studio Marketplace]
 
 The Visual Studio Marketplace is operated by Microsoft and provides extensions for a wide range of open-source and commercial development tools. It contains the largest collection of Visual Studio Code extensions.
 
-Although many extensions are available free of charge, the marketplace is a proprietary service governed by Microsoft's licensing and distribution policies. Because of these licensing restrictions, Red Hat OpenShift Dev Spaces does not directly use the Visual Studio Marketplace as an extension source.
+Although many extensions are available free of charge, the marketplace is a proprietary service governed by Microsoft's licensing and distribution policies. Because of Microsoft's licensing restrictions on the Visual Studio Marketplace service, Red Hat OpenShift Dev Spaces does not directly integrate with it as an extension source. Instead, Dev Spaces uses Open VSX registries for extension discovery and installation.
 
 == Open VSX Registry (https://open-vsx.org[window=_blank])
 
@@ -34,7 +34,9 @@ Red Hat OpenShift Dev Spaces supports Open VSX registries as a source for IDE ex
 
 == Embedded Open VSX Registry
 
-Organizations can deploy their own Open VSX registry within OpenShift to provide a curated set of extensions for Dev Spaces users. This approach is particularly useful in disconnected, air-gapped, highly regulated, or proxy-restricted environments where access to external registries may be limited or prohibited.
+By default, Red Hat OpenShift Dev Spaces deploys an embedded Open VSX registry that provides a curated subset of extensions synchronized from the public Open VSX Registry.
+
+Organizations can also deploy and manage their own Open VSX registry within OpenShift to provide organization-approved extensions. This approach is particularly useful in disconnected, air-gapped, highly regulated, or proxy-restricted environments where access to external registries may be limited or prohibited.
 
 A private Open VSX registry can contain a selected subset of extensions from the public Open VSX Registry, along with internally developed extensions that are specific to an organization.
 
@@ -43,7 +45,7 @@ A private Open VSX registry can contain a selected subset of extensions from the
 Dev Spaces can be configured to use either the public Open VSX Registry or a privately managed Open VSX registry. In restricted environments, administrators typically deploy and maintain a curated Open VSX registry containing the extensions approved for use within their organization.
 ====
 
-== Lab: Enabling the Public Open VSX Registry
+== Lab: Configuring Dev Spaces to Use the Public Open VSX Registry
 
 In this hands-on lab, you will enable Dev Spaces to fetch plugins/extensions from the public Open VSX registry at https://open-vsx.org[window=_blank].
 
@@ -54,7 +56,7 @@ In this hands-on lab, you will enable Dev Spaces to fetch plugins/extensions fro
 $ oc login -u admin _OpenShift_API_URL_
 ----
 
-. Verify that an embedded plugin registry instance is running in the cluster
+. Verify that an embedded extension registry instance is running in the cluster
 +
 [source,bash,subs=+quotes]
 ----
@@ -67,7 +69,7 @@ devspaces-dashboard-d78c7fbdd-t2fvf                         1/1     Running
 *plugin-registry-b7fc7456c-96csx                             1/1   Running*
 ----
 
-. Verify that Dev Spaces uses the default embedded Open VSX registry. The default plugin registry is configured in the `devspaces` CheCluster CR YAML resource.
+. Verify that Dev Spaces uses the default embedded Open VSX registry. The default extension registry is configured in the `devspaces` CheCluster CR YAML resource.
 +
 [source,bash,subs=+quotes]
 ----
@@ -77,19 +79,19 @@ $ oc get checluster/devspaces  \
 ' '
 ----
 +
-NOTE: An output of blank (' ') for the `openVSXURL` attribute indicates that the default embedded registry is in use. Alternatively, this field can contain the URL of the Open VSX registry from which plugins should be fetched.
+NOTE: If the `openVSXURL` attribute is empty, Dev Spaces uses the default embedded Open VSX registry deployed within the cluster. If this field contains a URL, Dev Spaces retrieves extensions from the specified Open VSX registry.
 
 . Log in to the Dev Spaces dashboard as the `user1` user, and create a workspace. 
 
-. Search for an extension, for example, the `draw.io` plugin for drawing technical diagrams. This plugin does not exist in the internal plugin registry. You should see a message that says `No extensions found.`
+. Search for an extension, for example, the `draw.io Integration` extension. This extension does not exist in the internal extension registry. You should see a message that says `No extensions found.`
 
-. Go to https://open-vsx.org[window=_blank], and search for the `draw.io` plugin.
+. Go to https://open-vsx.org[window=_blank], and search for the `draw.io` extension.
 +
 image::openvsx-search.png[title=Search for draw.io plugin]
 
-. The limited set of plugins available in the embedded plugin registry is configured in a JSON file at https://github.com/redhat-developer/devspaces/blob/devspaces-3.16-rhel-8/dependencies/che-plugin-registry/openvsx-sync.json[window=_blank]. You can also check the list of extensions from the OpenShift web console by accessing the terminal in the `plugin-registry` pod, and then viewing the JSON file in the container at the location `/openvsx-server/openvsx-sync.json`.
+. The limited set of extensions available in the embedded extension registry is configured in a JSON file at https://github.com/redhat-developer/devspaces/blob/devspaces-3.27-rhel-9/dependencies/che-plugin-registry/openvsx-sync.json[window=_blank]. You can also check the list of extensions from the OpenShift web console by accessing the terminal in the `plugin-registry` pod, and then viewing the JSON file in the container at the location `/openvsx-server/openvsx-sync.json`.
 +
-NOTE: Replace the `devspaces-3.16-rhel-8` string in the URL with the matching version of Dev Spaces that you are running. Check the branch names in the https://github.com/redhat-developer/devspaces[window=_blank] repository for your Dev Spaces version.
+NOTE: Replace the `devspaces-3.27-rhel-9` branch name with the branch corresponding to the version of Dev Spaces deployed in your environment. You can identify available branches in the Red Hat Dev Spaces GitHub repository.
 
 . Stop the running workspace from the dashboard.
 
@@ -106,12 +108,23 @@ _checluster.org.eclipse.che/devspaces patched_
 
 . Restart the previously stopped workspace.
 
-. Search for the `draw.io` extension again. You should now see the plugin listed in the left panel. Click `Install` next to the plugin to install it in the Workspace.
+. Search for the `draw.io Integration` extension again. You should now see the extension listed in the Extensions view. Click `Install` to install it in the running workspace.
 +
 image::drawio-workspace.png[title=Draw.io extension in Workspace.]
 
-. Switch back to explorer mode and create a new file named `test.drawio` at the root of the project. The plugin's Drawing palette opens up. You should be able to create diagrams from within the workspace.
+. Switch back to explorer mode and create a new file named `test.drawio` at the root of the project. The extension's Drawing palette opens up. You should be able to create diagrams from within the workspace.
 +
 image::drawio-diagram.png[title=Draw.io diagram]
 
-. Clean up. Delete workspace.
+. (Optional) Restore the original configuration to use the embedded Open VSX registry. 
++
+[source,bash,subs=+quotes]
+----
+$ oc patch checluster/devspaces \
+  -n openshift-devspaces \
+  --type='merge' \
+  -p '{"spec":{"components":{"pluginRegistry": {"openVSXURL": "https://open-vsx.org"}}}}'
+_checluster.org.eclipse.che/devspaces patched_
+----
++
+Delete the workspace from the Dev Spaces dashboard.
